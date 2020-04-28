@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .ul {
+            width: 300px;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        .box {
+            position: relative;
+            width: 150px;
+            height: 200px;
+            float: left;
+        }
+
+        .box>div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            list-style: none;
+            width: 150px;
+            height: 200px;
+            font-size: 50px;
+            color: #fff;
+            background-color: #000;
+            text-align: center;
+            line-height: 200px;
+
+        }
+
+        div.active {
+            opacity: 0;
+            transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            /* Firefox 4 */
+            -webkit-transition: all 0.2s;
+            /* Safari 和 Chrome */
+            -o-transition: all 0.2s;
+            /* Opera */
+            transform: rotateX(180deg);
+            -webkit-transform: rotateX(180deg);
+            /* Safari and Chrome */
+            -moz-transform: rotateX(180deg);
+            /* Firefox */
+        }
+
+        .double1,
+        .units1 {
+            opacity: 0;
+            transform: rotateX(180deg);
+            -webkit-transform: rotateX(180deg);
+            /* Safari and Chrome */
+            -moz-transform: rotateX(180deg);
+            /* Firefox */
+        }
+
+        div.active1 {
+            opacity: 1;
+            transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            /* Firefox 4 */
+            -webkit-transition: all 0.2s;
+            /* Safari 和 Chrome */
+            -o-transition: all 0.2s;
+            /* Opera */
+            transform: rotateX(0deg);
+            -webkit-transform: rotateX(0deg);
+            /* Safari and Chrome */
+            -moz-transform: rotateX(0deg);
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="ul">
+            <div class="box">
+                <div class="double"></div>
+                <div class="double1"></div>
+            </div>
+            <div class="box">
+                <div class="units"></div>
+                <div class="units1"></div>
+            </div>
+        </div>
+</body>
+
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+    let double = 6,
+        units = 0;
+    $(".double").html(double);
+    $(".units").html(units);
+    //倒计时
+    let timer = null;
+    timer = setInterval(function () {
+        if (units == 0) {
+            double--;
+            $(".double").addClass("active");
+            $(".double1").addClass("active1");
+            let settimer = null;
+            settimer = setTimeout(function () {
+                $(".units").removeClass("active");
+                $(".units1").removeClass("active1");
+                $(".double").removeClass("active");
+                $(".double1").removeClass("active1");
+
+            }, 200);
+            if (double == -1) {
+                double = 5;
+            }
+        }
+        units--;
+        if (units == -1) {
+            units = 9;
+        }
+        $(".double").text(double);
+        $(".units").text(units);
+        $(".double1").text(double);
+        $(".units1").text(units);
+        if (double + units == "00") {
+            time = 60;
+        }
+        $(".units").addClass("active");
+        $(".units1").addClass("active1");
+        let settime = null;
+        settime = setTimeout(function () {
+            $(".units").removeClass("active");
+            $(".units1").removeClass("active1");
+        }, 200);
+
+    }, 1000);
+</script>
